@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zackary Ouirzane — Developer</title>
+<meta name="description" content="Portfolio of Zackary Ouirzane, a computer science technology student seeking a software development internship in spring 2027.">
+<meta name="theme-color" content="#1F3A5F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zackary Ouirzane — Developer">
+<meta property="og:description" content="Computer science technology student seeking a software development internship in spring 2027. Selected projects and contact.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="seal">ZO</span><span class="brand-name">ZACKARY OUIRZANE</span></a>
+  <div class="nav-right">
+    <nav aria-label="Main">
+      <a href="#about" data-i18n="navAbout"></a>
+      <a href="#projects" data-i18n="navProjects"></a>
+      <a href="#contact" data-i18n="navContact"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language / Langue">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="fr">FR</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="status"></span></p>
+      <h1 data-i18n-html="heroTitle"></h1>
+      <p class="lead" data-i18n="lead"></p>
+      <p class="links">
+        <a class="link-primary" href="#projects" data-i18n="viewProjects"></a>
+        <a href="resume.pdf" data-i18n="resume"></a>
+        <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+      </p>
+    </div>
+    <div class="vertical-name" aria-hidden="true">ZACKARY OUIRZANE</div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="section-head">
+      <h2 data-i18n="selectedWork"></h2>
+      <span class="muted" id="projects-count"></span>
+    </div>
+    <div class="grid" id="project-grid"></div>
+  </section>
+
+  <section id="about" class="section two-col">
+    <div>
+      <h2 data-i18n="aboutTitle"></h2>
+      <p data-i18n="aboutP1"></p>
+      <p data-i18n="aboutP2"></p>
+    </div>
+    <div>
+      <h2 data-i18n="skillsTitle"></h2>
+      <ul class="tags" id="skills"></ul>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <h2 data-i18n="contactTitle"></h2>
+    <p><a class="email" href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a></p>
+    <p class="links center">
+      <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+      <a href="resume.pdf" data-i18n="resume"></a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">© <span id="year"></span> Zackary Ouirzane</footer>
+
+<dialog id="detail" aria-labelledby="detail-title">
+  <button class="detail-close" id="detail-close" aria-label="Close project details">&times;</button>
+  <div id="detail-body"></div>
+</dialog>
+
+<script src="i18n.js"></script>
+<noscript><p style="text-align:center;padding:2rem">This site needs JavaScript to show the project list. Find my work on <a href="https://github.com/Gothrick">GitHub</a> or write to <a href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a>.</p></noscript>
+
+<script src="projects.js"></script>
+<script src="auto-projects.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

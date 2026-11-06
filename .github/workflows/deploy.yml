@@ -1,0 +1,53 @@
+name: Deploy site
+
+# Rebuilds the site when it changes, every day (to pick up new public repos),
+# and on demand from the Actions tab.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build cards from public repositories
+        run: node scripts/sync-repos.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
+          SITE_REPO: ${{ github.event.repository.name }}
+
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp -r index.html 404.html favicon.svg styles.css script.js i18n.js projects.js auto-projects.js resume.pdf images _site/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
