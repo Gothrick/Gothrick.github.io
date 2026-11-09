@@ -178,12 +178,12 @@ const PROJECTS = [
       en: [
         "Same on-disk format as Git: real `git fsck`, `git log`, and `git ls-tree` work on pygit repositories",
         "Safe checkout that refuses to overwrite uncommitted work, with file-to-folder changes handled",
-        "167 automated tests, including tests that run the real git program and the CLI as a separate process"
+        "195 automated tests, including tests that run the real git program and the CLI as a separate process"
       ],
       fr: [
         "Même format sur disque que Git : `git fsck`, `git log` et `git ls-tree` fonctionnent sur les dépôts pygit",
         "Checkout sécuritaire qui refuse d'écraser du travail non enregistré, avec gestion des changements fichier/dossier",
-        "167 tests automatisés, dont des tests qui exécutent le vrai programme git et la ligne de commande comme processus séparé"
+        "195 tests automatisés, dont des tests qui exécutent le vrai programme git et la ligne de commande comme processus séparé"
       ]
     },
     images: [
