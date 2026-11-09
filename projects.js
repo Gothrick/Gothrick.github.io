@@ -153,24 +153,24 @@ const PROJECTS = [
     ]
   },
   {
-    title: "pygit: Git in Python",
+    title: "pygit ZO: Git in Python",
     description: {
       en: "Git's core rebuilt in Python, using Git's real object format and checked against real Git.",
       fr: "Le cœur de Git réécrit en Python, avec le vrai format d'objets de Git et vérifié contre Git."
     },
     tech: ["Python", "Git", "pytest"],
     image: "images/pygit-demo.jpg",
-    code: "https://github.com/Gothrick/mini-git-python",
+    code: "https://github.com/Gothrick/pygit-ZO",
     live: "",
-    repo: "Gothrick/mini-git-python",
+    repo: "Gothrick/pygit-ZO",
     updated: { en: "Fall 2026", fr: "Automne 2026" },
     details: {
       en: [
-        "pygit is a small implementation of Git in Python with no dependencies. It supports init, add, status, diff, commit, log, branch, and checkout, plus the low-level commands hash-object, cat-file, ls-files, and ls-tree.",
+        "pygit ZO is a small implementation of Git in Python with no dependencies. It supports init, add, status, diff, commit, log, branch, and checkout, plus the low-level commands hash-object, cat-file, ls-files, and ls-tree.",
         "It stores blobs, trees, and commits in Git's real object format, so a repository made by pygit passes `git fsck --strict` and pygit can read commits written by real Git. Building it was a way to understand how Git works inside: content-addressed storage, the index, branches as small files, and how checkout rewrites the working folder."
       ],
       fr: [
-        "pygit est une petite implémentation de Git en Python, sans dépendance. Elle gère init, add, status, diff, commit, log, branch et checkout, ainsi que les commandes de bas niveau hash-object, cat-file, ls-files et ls-tree.",
+        "pygit ZO est une petite implémentation de Git en Python, sans dépendance. Elle gère init, add, status, diff, commit, log, branch et checkout, ainsi que les commandes de bas niveau hash-object, cat-file, ls-files et ls-tree.",
         "Elle stocke les blobs, les arbres et les commits dans le vrai format d'objets de Git : un dépôt créé par pygit passe `git fsck --strict`, et pygit peut lire des commits écrits par Git. Ce projet sert à comprendre le fonctionnement interne de Git : stockage par contenu, index, branches sous forme de petits fichiers et réécriture du dossier de travail par checkout."
       ]
     },
