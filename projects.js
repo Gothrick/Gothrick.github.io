@@ -151,6 +151,45 @@ const PROJECTS = [
       "images/http-server-home.jpg",
       "images/http-server-greeting.jpg"
     ]
+  },
+  {
+    title: "pygit: Git in Python",
+    description: {
+      en: "Git's core rebuilt in Python, using Git's real object format and checked against real Git.",
+      fr: "Le cœur de Git réécrit en Python, avec le vrai format d'objets de Git et vérifié contre Git."
+    },
+    tech: ["Python", "Git", "pytest"],
+    image: "images/pygit-demo.jpg",
+    code: "https://github.com/Gothrick/mini-git-python",
+    live: "",
+    repo: "Gothrick/mini-git-python",
+    updated: { en: "Fall 2026", fr: "Automne 2026" },
+    details: {
+      en: [
+        "pygit is a small implementation of Git in Python with no dependencies. It supports init, add, status, diff, commit, log, branch, and checkout, plus the low-level commands hash-object, cat-file, ls-files, and ls-tree.",
+        "It stores blobs, trees, and commits in Git's real object format, so a repository made by pygit passes `git fsck --strict` and pygit can read commits written by real Git. Building it was a way to understand how Git works inside: content-addressed storage, the index, branches as small files, and how checkout rewrites the working folder."
+      ],
+      fr: [
+        "pygit est une petite implémentation de Git en Python, sans dépendance. Elle gère init, add, status, diff, commit, log, branch et checkout, ainsi que les commandes de bas niveau hash-object, cat-file, ls-files et ls-tree.",
+        "Elle stocke les blobs, les arbres et les commits dans le vrai format d'objets de Git : un dépôt créé par pygit passe `git fsck --strict`, et pygit peut lire des commits écrits par Git. Ce projet sert à comprendre le fonctionnement interne de Git : stockage par contenu, index, branches sous forme de petits fichiers et réécriture du dossier de travail par checkout."
+      ]
+    },
+    highlights: {
+      en: [
+        "Same on-disk format as Git: real `git fsck`, `git log`, and `git ls-tree` work on pygit repositories",
+        "Safe checkout that refuses to overwrite uncommitted work, with file-to-folder changes handled",
+        "91 automated tests, including tests that run the real git program"
+      ],
+      fr: [
+        "Même format sur disque que Git : `git fsck`, `git log` et `git ls-tree` fonctionnent sur les dépôts pygit",
+        "Checkout sécuritaire qui refuse d'écraser du travail non enregistré, avec gestion des changements fichier/dossier",
+        "91 tests automatisés, dont des tests qui exécutent le vrai programme git"
+      ]
+    },
+    images: [
+      "images/pygit-demo.jpg",
+      "images/pygit-full-session.jpg"
+    ]
   }
 ];
 

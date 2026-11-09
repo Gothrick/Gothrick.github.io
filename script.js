@@ -34,7 +34,7 @@ const TECH_COLORS = {
   "python": [46, 80], "javascript": [48, 85], "firebase": [40, 85],
   "typescript": [212, 55], "css": [212, 55], "c": [212, 55], "c++": [212, 55], "docker": [205, 60],
   "postgresql": [220, 45], "mysql": [200, 50], "sql": [190, 45], "sqlite": [195, 40],
-  ".net 8": [262, 50], "tcp": [200, 40], "xunit": [140, 35], "react native": [200, 60], "graphql": [320, 60], "expo": [230, 15], "vite": [262, 70], "tailwind css": [190, 65], "laravel": [5, 65], "asp.net": [265, 40], "bootstrap": [262, 45], "electron": [185, 40], "mariadb": [30, 35], "tls": [215, 15],
+  "pytest": [200, 40], ".net 8": [262, 50], "tcp": [200, 40], "xunit": [140, 35], "react native": [200, 60], "graphql": [320, 60], "expo": [230, 15], "vite": [262, 70], "tailwind css": [190, 65], "laravel": [5, 65], "asp.net": [265, 40], "bootstrap": [262, 45], "electron": [185, 40], "mariadb": [30, 35], "tls": [215, 15],
   "c#": [270, 40], "kotlin": [270, 45], "php": [245, 35],
   "flask": [30, 12], "next.js": [30, 8], "go": [185, 55], "rust": [20, 40]
 };
