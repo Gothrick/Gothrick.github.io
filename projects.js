@@ -190,6 +190,44 @@ const PROJECTS = [
       "images/pygit-demo.jpg",
       "images/pygit-full-session.jpg"
     ]
+  },
+  {
+    title: "pychain ZO: a blockchain in Python",
+    description: {
+      en: "A small blockchain with signed transactions, proof of work, and several nodes that agree over HTTP.",
+      fr: "Une petite blockchain avec transactions signées, preuve de travail et plusieurs nœuds qui s'accordent par HTTP."
+    },
+    tech: ["Python", "Blockchain", "ECDSA", "HTTP", "pytest"],
+    image: "images/pychain-demo.jpg",
+    code: "https://github.com/Gothrick/pychain-ZO",
+    live: "",
+    repo: "Gothrick/pychain-ZO",
+    updated: { en: "Fall 2026", fr: "Automne 2026" },
+    details: {
+      en: [
+        "pychain ZO is a small blockchain written in Python. Wallets sign payments with ECDSA, miners seal blocks with proof of work, and every node re-checks every block and transaction it receives instead of trusting its sender.",
+        "Several nodes talk over HTTP: they pass on transactions and new blocks, a node that was offline catches up from a peer, and when two chains compete a node switches to the valid one with the most work. Payments from a dropped block go back to the pending pool. It is a learning project, and the README lists what it deliberately leaves out."
+      ],
+      fr: [
+        "pychain ZO est une petite blockchain écrite en Python. Les portefeuilles signent les paiements avec ECDSA, les mineurs scellent les blocs par preuve de travail, et chaque nœud revérifie chaque bloc et chaque transaction reçus au lieu de faire confiance à l'expéditeur.",
+        "Plusieurs nœuds communiquent par HTTP : ils se transmettent les transactions et les nouveaux blocs, un nœud resté hors ligne se met à jour auprès d'un pair, et quand deux chaînes s'opposent, un nœud adopte la chaîne valide qui représente le plus de travail. Les paiements d'un bloc abandonné retournent dans la file d'attente. C'est un projet d'apprentissage, et le README liste ce qu'il laisse volontairement de côté."
+      ]
+    },
+    highlights: {
+      en: [
+        "Signed transactions with replay protection, and double spends caught before they reach a block",
+        "Fork resolution by total work, with orphaned payments returned to the pending pool",
+        "91 automated tests, including real HTTP nodes on local ports, and a two-node demo"
+      ],
+      fr: [
+        "Transactions signées avec protection contre le rejeu, et doubles dépenses détectées avant d'atteindre un bloc",
+        "Résolution des bifurcations selon le travail total, les paiements orphelins retournant dans la file d'attente",
+        "91 tests automatisés, dont de vrais nœuds HTTP sur des ports locaux, et une démo à deux nœuds"
+      ]
+    },
+    images: [
+      "images/pychain-demo.jpg"
+    ]
   }
 ];
 
