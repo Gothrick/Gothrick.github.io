@@ -42,6 +42,9 @@ jobs:
         run: |
           mkdir _site
           cp -r index.html 404.html favicon.svg styles.css script.js i18n.js projects.js auto-projects.js resume.pdf images fonts _site/
+          # Stamp the stylesheet and scripts with this build, so browsers fetch the new ones
+          # instead of showing a cached copy for up to ten minutes.
+          sed -i -E "s#(href|src)=\"(styles\.css|i18n\.js|projects\.js|auto-projects\.js|script\.js)\"#\1=\"\2?v=${GITHUB_SHA::7}\"#g" _site/index.html
 
       - uses: actions/configure-pages@v5
 
