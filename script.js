@@ -139,10 +139,11 @@ function renderCard(project, index) {
   if (project.code) foot.append(link(project.code, s("code"), "ext"));
   else if (project.note) foot.append(el("span", "muted", s("privateRepo")));
 
-  body.append(top, el("p", "card-desc", t(project.description) || ""), pills(project.tech, 3), foot);
+  // The number sits inside the card, between the description and the pills, so it is
+  // clear which project it belongs to.
+  const readout = statLine(project, "readout") || el("div", "readout empty");
+  body.append(top, el("p", "card-desc", t(project.description) || ""), readout, pills(project.tech, 3), foot);
   card.append(shot, body);
-  const strip = statLine(project, "strip");
-  if (strip) card.append(strip);
   return card;
 }
 
