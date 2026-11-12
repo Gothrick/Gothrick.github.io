@@ -21,6 +21,14 @@
 }
 
 * { box-sizing: border-box; }
+
+/* Scrollbars: thin, dark track, orange thumb (the same orange as the glow). */
+html { scrollbar-width: thin; scrollbar-color: var(--glow) var(--ink); }
+#detail-body { scrollbar-width: thin; scrollbar-color: var(--glow) var(--ink); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--glow); border: 2px solid var(--ink); }
+::-webkit-scrollbar-thumb:hover { background: #FFB54D; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -139,7 +147,7 @@ h2 { font-size: 1.5rem; margin-bottom: 16px; }
 /* --- details pop-up --- */
 body:has(dialog[open]) { overflow: hidden; }
 dialog { width: min(980px, calc(100% - 32px)); max-height: calc(100vh - 48px); border: 1px solid var(--ink); padding: 0; background: var(--paper); color: var(--ink); overflow: hidden; }
-#detail-body { max-height: calc(100vh - 50px); overflow-y: auto; scrollbar-width: thin; }
+#detail-body { max-height: calc(100vh - 50px); overflow-y: auto; }
 dialog::backdrop { background: rgba(10, 10, 13, 0.7); }
 @media (prefers-reduced-motion: no-preference) {
   dialog[open] { animation: pop 0.2s ease; }
