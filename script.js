@@ -122,6 +122,10 @@ function renderCard(project, index) {
   const card = el("article", "card");
   const shot = project.image ? imageShot(project.image, project.title) : placeholderShot();
 
+  if (project.kind === "solo" || project.kind === "team") {
+    shot.append(el("span", `kind ${project.kind}`, s(project.kind === "solo" ? "tagSolo" : "tagTeam")));
+  }
+
   const body = el("div", "card-body");
   const top = el("div", "card-top");
   const title = el("h3");

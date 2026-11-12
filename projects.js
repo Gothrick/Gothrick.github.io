@@ -18,6 +18,7 @@
 //   stat         The one number that sells the project, shown in the glowing digits:
 //                { value: 12, label: { en: "what it counts", fr: "..." } }
 //   role         Your part in it, shown in the pop-up, e.g. "Solo project"
+//   kind         "solo" or "team": shown as a small tag on the card's screenshot
 //
 // Languages: any text field (title, description, note, updated, details, highlights)
 // can be plain text, or { en: "...", fr: "..." } to show a different text per language.
@@ -39,6 +40,7 @@ const PROJECTS = [
     tech: ["PHP", "Laravel", "React", "Vite", "Tailwind CSS", "SQLite"],
     image: "images/sheet-happens-character-sheet.jpg",
     stat: { value: 558, label: { en: "automated checks that the code works", fr: "vérifications automatiques du code" } },
+    kind: "team",
     role: { en: "Team project", fr: "Projet d'équipe" },
     code: "https://github.com/Gothrick/Dnd_Character_Creater",
     live: "",
@@ -84,6 +86,7 @@ const PROJECTS = [
     tech: ["React", "React Native", "Electron", "Laravel", "GraphQL", "Docker"],
     image: "images/wirechat-server-channel.jpg",
     stat: { value: 3, label: { en: "apps sharing one server: web, desktop, phone", fr: "applis sur un même serveur : web, bureau, mobile" } },
+    kind: "team",
     role: { en: "Team project", fr: "Projet d'équipe" },
     code: "https://github.com/Gothrick/WireChat",
     live: "",
@@ -129,6 +132,7 @@ const PROJECTS = [
     tech: ["C#", ".NET 8", "TCP", "xUnit"],
     image: "images/http-server-home.jpg",
     stat: { value: 27, label: { en: "automated checks, on a server built with no framework", fr: "vérifications automatiques, sur un serveur sans framework" } },
+    kind: "team",
     role: { en: "Group lab, then reworked on my own", fr: "Laboratoire d'équipe, puis retravaillé seul" },
     code: "https://github.com/Gothrick/C-_HTTP_Server",
     live: "",
@@ -170,6 +174,7 @@ const PROJECTS = [
     tech: ["Python", "Git", "pytest"],
     image: "images/pygit-demo.jpg",
     stat: { value: 12, label: { en: "Git commands rebuilt from scratch", fr: "commandes Git réécrites de zéro" } },
+    kind: "solo",
     role: { en: "Solo project", fr: "Projet personnel" },
     code: "https://github.com/Gothrick/pygit-ZO",
     live: "",
@@ -211,6 +216,7 @@ const PROJECTS = [
     tech: ["Python", "Blockchain", "ECDSA", "HTTP", "pytest"],
     image: "images/pychain-demo.jpg",
     stat: { value: 91, label: { en: "automated checks that the code works", fr: "vérifications automatiques du code" } },
+    kind: "solo",
     role: { en: "Solo project", fr: "Projet personnel" },
     code: "https://github.com/Gothrick/pychain-ZO",
     live: "",

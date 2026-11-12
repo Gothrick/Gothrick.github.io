@@ -104,7 +104,10 @@ h2 { font-size: 1.5rem; margin-bottom: 16px; }
 .card:hover, .card:has(.card-open:focus-visible) { background: var(--ink); color: var(--on-dark); }
 .shot { aspect-ratio: 16 / 9; background: #EFEFEC; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.72rem; color: #8A8A86; overflow: hidden; }
 .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.card > .shot { border-bottom: 1px solid var(--ink); }
+.card > .shot { border-bottom: 1px solid var(--ink); position: relative; }
+/* Solo or team tag in the corner of the screenshot. */
+.kind { position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; background: var(--ink); color: var(--on-dark); border: 1px solid #55555C; }
+.kind.solo { background: var(--glow); color: var(--ink); border-color: var(--glow); }
 .card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
 .card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 .card h3 { font-size: 1.12rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
