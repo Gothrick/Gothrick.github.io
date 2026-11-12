@@ -127,7 +127,8 @@ function renderCard(project, index) {
   const title = el("h3");
   const open = el("button", "card-open", t(project.title));
   open.type = "button";
-  open.addEventListener("click", () => openProject(index));
+  // event.detail is 0 for a keyboard "click" and 1 or more for a mouse or touch one.
+  open.addEventListener("click", (event) => { openedByPointer = event.detail > 0; openProject(index); });
   title.append(open);
   const num = el("span", "idx", pad(index));
   num.setAttribute("aria-hidden", "true");
@@ -138,7 +139,7 @@ function renderCard(project, index) {
   if (project.code) foot.append(link(project.code, s("code"), "ext"));
   else if (project.note) foot.append(el("span", "muted", s("privateRepo")));
 
-  body.append(top, el("p", "card-desc", t(project.description) || ""), pills(project.tech, 4), foot);
+  body.append(top, el("p", "card-desc", t(project.description) || ""), pills(project.tech, 3), foot);
   card.append(shot, body);
   const strip = statLine(project, "strip");
   if (strip) card.append(strip);
@@ -167,6 +168,7 @@ ALL_PROJECTS.forEach((p, i) => {
 const dialog = document.getElementById("detail");
 const detailBody = document.getElementById("detail-body");
 let current = -1;
+let openedByPointer = false;
 
 function renderDetail(index) {
   const p = ALL_PROJECTS[index];
@@ -245,6 +247,10 @@ function openProject(index) {
 }
 
 dialog.addEventListener("close", () => {
+  // The browser hands focus back to the card. After a mouse click that would leave it
+  // looking selected, so let go of it; keyboard users keep their place.
+  if (openedByPointer && document.activeElement) document.activeElement.blur();
+  openedByPointer = false;
   if (location.hash.startsWith("#project-")) history.replaceState(null, "", location.pathname + location.search);
 });
 document.getElementById("detail-close").addEventListener("click", () => dialog.close());
