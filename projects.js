@@ -132,7 +132,7 @@ const PROJECTS = [
     tech: ["C#", ".NET 8", "TCP", "xUnit"],
     image: "images/http-server-home.jpg",
     stat: { value: 27, label: { en: "automated checks, on a server built with no framework", fr: "vérifications automatiques, sur un serveur sans framework" } },
-    kind: "team",
+    kind: "solo",
     role: { en: "Group lab, then reworked on my own", fr: "Laboratoire d'équipe, puis retravaillé seul" },
     code: "https://github.com/Gothrick/C-_HTTP_Server",
     live: "",
