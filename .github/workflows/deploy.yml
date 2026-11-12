@@ -41,7 +41,7 @@ jobs:
       - name: Assemble the site
         run: |
           mkdir _site
-          cp -r index.html 404.html favicon.svg styles.css script.js i18n.js projects.js auto-projects.js resume.pdf images _site/
+          cp -r index.html 404.html favicon.svg styles.css script.js i18n.js projects.js auto-projects.js resume.pdf images fonts _site/
 
       - uses: actions/configure-pages@v5
 
