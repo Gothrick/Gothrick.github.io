@@ -22,13 +22,12 @@
 
 * { box-sizing: border-box; }
 
-/* Scrollbars: thin, dark track, orange thumb (the same orange as the glow). */
-html { scrollbar-width: thin; scrollbar-color: var(--glow) var(--ink); }
-#detail-body { scrollbar-width: thin; scrollbar-color: var(--glow) var(--ink); }
+/* Scrollbars: thin, light track and a black thumb, so they read on the white page. */
+html, #detail-body { scrollbar-width: thin; scrollbar-color: var(--ink) #F0F0EE; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--ink); }
-::-webkit-scrollbar-thumb { background: var(--glow); border: 2px solid var(--ink); }
-::-webkit-scrollbar-thumb:hover { background: #FFB54D; }
+::-webkit-scrollbar-track { background: #F0F0EE; }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 2px solid #F0F0EE; }
+::-webkit-scrollbar-thumb:hover { background: #2A2A30; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
