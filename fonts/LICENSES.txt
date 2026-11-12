@@ -1,0 +1,6 @@
+Fonts in this folder, all under the SIL Open Font License 1.1 (https://openfontlicense.org):
+
+- Space Grotesk, by Florian Karsten
+- Michroma, by Vernon Adams
+- JetBrains Mono, by JetBrains
+- DSEG7 Classic, by Keshikan (https://github.com/keshikan/DSEG)

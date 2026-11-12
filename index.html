@@ -4,79 +4,129 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zackary Ouirzane — Developer</title>
-<meta name="description" content="Portfolio of Zackary Ouirzane, a computer science technology student seeking a software development internship in spring 2027.">
-<meta name="theme-color" content="#1F3A5F">
+<meta name="description" content="Portfolio of Zackary Ouirzane, a computer science technology student seeking a software development internship in spring 2027 and a developer job afterwards.">
+<meta name="theme-color" content="#0A0A0D">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Zackary Ouirzane — Developer">
-<meta property="og:description" content="Computer science technology student seeking a software development internship in spring 2027. Selected projects and contact.">
+<meta property="og:description" content="Computer science technology student seeking a software development internship in spring 2027, then a developer job. Selected projects and contact.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="nav">
-  <a class="brand" href="#top"><span class="seal">ZO</span><span class="brand-name">ZACKARY OUIRZANE</span></a>
-  <div class="nav-right">
-    <nav aria-label="Main">
-      <a href="#about" data-i18n="navAbout"></a>
-      <a href="#projects" data-i18n="navProjects"></a>
-      <a href="#contact" data-i18n="navContact"></a>
-    </nav>
-    <div class="lang" role="group" aria-label="Language / Langue">
-      <button type="button" data-lang="en">EN</button>
-      <button type="button" data-lang="fr">FR</button>
+<header class="nav dark">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="sq" aria-hidden="true"></span>ZO / OUIRZANE</a>
+    <div class="nav-right">
+      <nav aria-label="Main">
+        <a href="#projects"><span class="idx" aria-hidden="true">01</span><span data-i18n="navProjects"></span></a>
+        <a href="#about"><span class="idx" aria-hidden="true">02</span><span data-i18n="navAbout"></span></a>
+        <a href="#contact"><span class="idx" aria-hidden="true">03</span><span data-i18n="navContact"></span></a>
+      </nav>
+      <div class="lang" role="group" aria-label="Language / Langue">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="fr">FR</button>
+      </div>
     </div>
   </div>
 </header>
 
 <main id="top">
 
-  <section class="hero">
-    <div class="hero-text">
-      <p class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="status"></span></p>
-      <h1 data-i18n-html="heroTitle"></h1>
-      <p class="lead" data-i18n="lead"></p>
-      <p class="links">
-        <a class="link-primary" href="#projects" data-i18n="viewProjects"></a>
-        <a href="resume.pdf" data-i18n="resume"></a>
-        <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
-      </p>
+  <section class="hero dark">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="status"><span class="sq pulse" aria-hidden="true"></span><span data-i18n="status"></span></p>
+        <h1 data-i18n-html="heroTitle"></h1>
+        <p class="lead" data-i18n="lead"></p>
+        <div class="stats">
+          <div class="stat">
+            <div class="label" data-i18n="statStartLabel"></div>
+            <span class="seg big" id="stat-days" data-ghost="888">000</span>
+            <div class="sub" data-i18n="statStartSub"></div>
+          </div>
+          <div class="stat">
+            <div class="label" data-i18n="statProjectsLabel"></div>
+            <span class="seg big" id="stat-projects" data-ghost="88">00</span>
+            <div class="sub" data-i18n="statProjectsSub"></div>
+          </div>
+          <div class="stat">
+            <div class="label" data-i18n="statJobLabel"></div>
+            <span class="seg big" id="stat-year" data-ghost="8888">2027</span>
+            <div class="sub" data-i18n="statJobSub"></div>
+          </div>
+        </div>
+        <p class="links">
+          <a class="btn btn-glow" href="#projects" data-i18n="viewProjects"></a>
+          <a href="resume.pdf" data-i18n="resume"></a>
+          <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+        </p>
+      </div>
+      <dl class="facts">
+        <span class="x tl" aria-hidden="true"></span><span class="x tr" aria-hidden="true"></span>
+        <span class="x bl" aria-hidden="true"></span><span class="x br" aria-hidden="true"></span>
+        <div><dt data-i18n="factSeekingLabel"></dt><dd data-i18n="factSeeking"></dd></div>
+        <div><dt data-i18n="factSchoolLabel"></dt><dd>Cégep de Saint-Jean-sur-Richelieu</dd></div>
+        <div><dt data-i18n="factWorkLabel"></dt><dd data-i18n="factWork"></dd></div>
+        <div><dt data-i18n="factSpeaksLabel"></dt><dd data-i18n="factSpeaks"></dd></div>
+      </dl>
     </div>
-    <div class="vertical-name" aria-hidden="true">ZACKARY OUIRZANE</div>
   </section>
 
   <section id="projects" class="section">
-    <div class="section-head">
-      <h2 data-i18n="selectedWork"></h2>
-      <span class="muted" id="projects-count"></span>
+    <div class="wrap">
+      <div class="section-head">
+        <h2><span class="idx" aria-hidden="true">01</span><span data-i18n="selectedWork"></span></h2>
+        <span class="mono muted" id="projects-count"></span>
+      </div>
+      <div class="grid" id="project-grid"></div>
     </div>
-    <div class="grid" id="project-grid"></div>
   </section>
 
-  <section id="about" class="section two-col">
-    <div>
-      <h2 data-i18n="aboutTitle"></h2>
-      <p data-i18n="aboutP1"></p>
-      <p data-i18n="aboutP2"></p>
-    </div>
-    <div>
-      <h2 data-i18n="skillsTitle"></h2>
-      <ul class="tags" id="skills"></ul>
+  <section id="about" class="section">
+    <div class="wrap two-col">
+      <div>
+        <h2><span class="idx" aria-hidden="true">02</span><span data-i18n="aboutTitle"></span></h2>
+        <p data-i18n="aboutP1"></p>
+        <p data-i18n="aboutP2"></p>
+      </div>
+      <div>
+        <h2 class="plain" data-i18n="skillsTitle"></h2>
+        <dl class="skills" id="skills"></dl>
+      </div>
     </div>
   </section>
 
   <section id="contact" class="section contact">
-    <h2 data-i18n="contactTitle"></h2>
-    <p><a class="email" href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a></p>
-    <p class="links center">
-      <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
-      <a href="resume.pdf" data-i18n="resume"></a>
-    </p>
+    <div class="wrap">
+      <h2><span class="idx" aria-hidden="true">03</span><span data-i18n="contactTitle"></span></h2>
+      <p><a class="email" href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a></p>
+      <p class="links">
+        <a class="btn btn-ink" href="#projects" data-i18n="viewProjects"></a>
+        <a href="resume.pdf" data-i18n="resume"></a>
+        <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+      </p>
+    </div>
   </section>
 
 </main>
 
-<footer class="footer">© <span id="year"></span> Zackary Ouirzane</footer>
+<footer class="footer dark">
+  <div class="wrap footer-inner">
+    <div class="footer-links mono">
+      <a href="mailto:zackaryouirzane@gmail.com">Email</a>
+      <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+      <a href="resume.pdf" data-i18n="resumeShort"></a>
+      <span><span data-i18n="updated"></span> <span id="site-updated"></span></span>
+      <span>© <span id="year"></span> Zackary Ouirzane</span>
+    </div>
+    <div class="clock">
+      <span class="label" data-i18n="clockLabel"></span>
+      <span class="seg" id="clock" data-ghost="88:88:88" aria-hidden="true">00:00:00</span>
+    </div>
+  </div>
+</footer>
 
 <dialog id="detail" aria-labelledby="detail-title">
   <button class="detail-close" id="detail-close" aria-label="Close project details">&times;</button>

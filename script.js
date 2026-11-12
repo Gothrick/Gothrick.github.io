@@ -10,6 +10,8 @@ const ALL_PROJECTS = [...PROJECTS, ...(typeof AUTO_PROJECTS !== "undefined" ? AU
 // A project field can be plain text or { en: "...", fr: "..." }.
 const t = (v) => (v && typeof v === "object" && !Array.isArray(v) ? (v[lang] ?? v.en ?? "") : v);
 
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const el = (tag, className, text) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -26,32 +28,75 @@ const link = (href, label, className) => {
 
 const pad = (i) => String(i + 1).padStart(2, "0");
 
-// Pill colors by technology: [hue, saturation]. Unknown names fall back to navy.
+// Pill colors by technology: [hue, saturation], shown as the bar on the left of each pill.
 // To add one, write its name in lowercase, e.g. "svelte": [14, 70].
 const TECH_COLORS = {
-  "react": [150, 45], "vue": [150, 45], "node.js": [120, 40], "mongodb": [130, 45], "android": [100, 45],
-  "java": [24, 75], "html": [16, 75], "swift": [24, 75], "git": [8, 65], "angular": [0, 60],
-  "python": [46, 80], "javascript": [48, 85], "firebase": [40, 85],
-  "typescript": [212, 55], "css": [212, 55], "c": [212, 55], "c++": [212, 55], "docker": [205, 60],
+  "react": [190, 70], "vue": [150, 45], "node.js": [120, 40], "mongodb": [130, 45], "android": [100, 45],
+  "java": [24, 75], "html": [16, 75], "swift": [24, 75], "git": [12, 75], "angular": [0, 60],
+  "python": [212, 60], "javascript": [48, 85], "firebase": [40, 85],
+  "typescript": [212, 55], "css": [212, 55], "c": [212, 55], "c++": [212, 55], "docker": [205, 70],
   "postgresql": [220, 45], "mysql": [200, 50], "sql": [190, 45], "sqlite": [195, 40],
-  "pytest": [200, 40], "blockchain": [35, 65], "ecdsa": [300, 35], "http": [175, 45], ".net 8": [262, 50], "tcp": [200, 40], "xunit": [140, 35], "react native": [200, 60], "graphql": [320, 60], "expo": [230, 15], "vite": [262, 70], "tailwind css": [190, 65], "laravel": [5, 65], "asp.net": [265, 40], "bootstrap": [262, 45], "electron": [185, 40], "mariadb": [30, 35], "tls": [215, 15],
-  "c#": [270, 40], "kotlin": [270, 45], "php": [245, 35],
+  "pytest": [195, 60], "blockchain": [38, 80], "ecdsa": [300, 45], "http": [170, 55], ".net 8": [262, 50], "tcp": [200, 40], "xunit": [140, 40], "react native": [200, 70], "graphql": [320, 65], "expo": [230, 15], "vite": [262, 70], "tailwind css": [190, 65], "laravel": [5, 70], "asp.net": [265, 40], "bootstrap": [262, 45], "electron": [185, 40], "mariadb": [30, 35], "tls": [215, 15],
+  "c#": [270, 50], "kotlin": [270, 45], "php": [245, 45],
   "flask": [30, 12], "next.js": [30, 8], "go": [185, 55], "rust": [20, 40]
 };
 
-const pills = (list) => {
+// `max` limits how many pills are shown (cards); the rest become a "+N" pill.
+const pills = (list, max) => {
   const ul = el("ul", "pills");
-  (list || []).forEach((name) => {
+  const all = list || [];
+  const shown = max ? all.slice(0, max) : all;
+  shown.forEach((name) => {
     const li = el("li", "", name);
     const color = TECH_COLORS[name.toLowerCase()];
-    if (color) {
-      li.style.setProperty("--pill-bg", `hsl(${color[0]} ${color[1]}% 87%)`);
-      li.style.setProperty("--pill-fg", `hsl(${color[0]} ${color[1]}% 24%)`);
-    }
+    if (color) li.style.setProperty("--bar", `hsl(${color[0]} ${color[1]}% 52%)`);
     ul.append(li);
   });
+  if (all.length > shown.length) ul.append(el("li", "more", `+${all.length - shown.length}`));
   return ul;
 };
+
+// A number in the segment-display font, with every segment faintly lit behind it.
+const seg = (value, minDigits) => {
+  const text = String(value).padStart(minDigits || 2, "0");
+  const node = el("span", "seg", text);
+  node.dataset.ghost = text.replace(/\d/g, "8");
+  return node;
+};
+
+// Count a segment number up from zero the first time it scrolls into view.
+function countUp(node) {
+  const target = Number(node.dataset.target ?? node.textContent);
+  const width = node.textContent.length;
+  if (reducedMotion || !Number.isFinite(target) || target === 0) return;
+  const start = performance.now();
+  const duration = 900;
+  const frame = (now) => {
+    const p = Math.min(1, (now - start) / duration);
+    node.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3)))).padStart(width, "0");
+    if (p < 1) requestAnimationFrame(frame);
+  };
+  node.textContent = "0".padStart(width, "0");
+  requestAnimationFrame(frame);
+}
+const counted = new WeakSet();
+const countObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !counted.has(e.target)) { counted.add(e.target); countUp(e.target); countObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 })
+  : null;
+let animateNumbers = true;
+const watch = (node) => { if (countObserver && animateNumbers) countObserver.observe(node); return node; };
+
+// The one number that sells a project, with plain words saying what it counts.
+function statLine(project, className) {
+  if (!project.stat) return null;
+  const line = el("div", className);
+  line.append(watch(seg(project.stat.value, 2)), el("span", "what", t(project.stat.label)));
+  return line;
+}
 
 const pushedAt = {};
 const dateText = (index) =>
@@ -73,41 +118,30 @@ function imageShot(src, title) {
   return shot;
 }
 
-let animateCards = true;
-const io = "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches
-  ? new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 })
-  : null;
-
 function renderCard(project, index) {
-  const card = el("article", "card reveal");
+  const card = el("article", "card");
   const shot = project.image ? imageShot(project.image, project.title) : placeholderShot();
 
   const body = el("div", "card-body");
-  const meta = el("div", "card-meta");
-  const updated = el("span", "muted", dateText(index));
-  updated.dataset.updated = index;
-  meta.append(el("span", "num", pad(index)), updated);
-
+  const top = el("div", "card-top");
   const title = el("h3");
   const open = el("button", "card-open", t(project.title));
   open.type = "button";
   open.addEventListener("click", () => openProject(index));
   title.append(open);
+  const num = el("span", "idx", pad(index));
+  num.setAttribute("aria-hidden", "true");
+  top.append(title, num);
 
   const foot = el("div", "card-foot");
-  foot.append(el("span", "more", s("viewDetails")));
+  foot.append(el("span", "", s("viewDetails")));
   if (project.code) foot.append(link(project.code, s("code"), "ext"));
-  else if (project.note) foot.append(el("span", "ext", s("privateRepo")));
+  else if (project.note) foot.append(el("span", "muted", s("privateRepo")));
 
-  body.append(meta, title, el("p", "card-desc", t(project.description) || ""), pills(project.tech), foot);
+  body.append(top, el("p", "card-desc", t(project.description) || ""), pills(project.tech, 4), foot);
   card.append(shot, body);
-
-  if (io && animateCards) io.observe(card);
-  else card.classList.add("visible");
+  const strip = statLine(project, "strip");
+  if (strip) card.append(strip);
   return card;
 }
 
@@ -115,7 +149,6 @@ const grid = document.getElementById("project-grid");
 
 function renderGrid() {
   grid.replaceChildren(...ALL_PROJECTS.map(renderCard));
-  animateCards = false;
   const n = ALL_PROJECTS.length;
   document.getElementById("projects-count").textContent = `${n} ${n === 1 ? s("projectOne") : s("projectMany")}`;
 }
@@ -140,39 +173,52 @@ function renderDetail(index) {
   const wrap = el("div", "detail-inner");
 
   const head = el("div", "detail-head");
-  head.append(el("span", "num big", pad(index)));
-  const titleWrap = el("div");
+  const num = el("span", "idx", pad(index));
+  num.setAttribute("aria-hidden", "true");
   const h = el("h2", "", t(p.title));
   h.id = "detail-title";
-  titleWrap.append(h, el("span", "muted", dateText(index)));
-  head.append(titleWrap);
-  wrap.append(head, pills(p.tech));
+  head.append(num, h);
 
+  // Facts pane: on a phone it sits right under the title, before the long text.
+  const aside = el("aside", "aside dark");
+  const row = (label, content) => {
+    const r = el("div", "row");
+    r.append(el("div", "label", label), content);
+    return r;
+  };
+  if (p.tech && p.tech.length) aside.append(row(s("factStack"), pills(p.tech)));
+  if (p.role) aside.append(row(s("factRole"), el("div", "", t(p.role))));
+  const when = el("div", "", dateText(index));
+  when.dataset.updated = index;
+  if (when.textContent) aside.append(row(s("factDate"), when));
+  const proof = statLine(p, "proof");
+  if (proof) aside.append(row(s("factNumber"), proof));
   const actions = el("div", "actions");
-  if (p.code) actions.append(link(p.code, s("viewCode"), "btn btn-solid"));
+  if (p.code) actions.append(link(p.code, s("viewCode"), "btn btn-glow"));
   if (p.live) actions.append(link(p.live, s("liveDemo"), "btn"));
-  if (!p.code && p.note) actions.append(el("span", "muted", t(p.note)));
-  if (actions.children.length) wrap.append(actions);
+  if (!p.code && p.note) actions.append(el("span", "", t(p.note)));
+  if (actions.children.length) aside.append(actions);
+
+  const main = el("div", "detail-main");
+  const details = t(p.details);
+  const paragraphs = details && details.length ? details : [t(p.description) || ""];
+  const text = el("div", "detail-text");
+  paragraphs.forEach((para) => text.append(el("p", "", para)));
+  main.append(text);
+
+  const highlights = t(p.highlights);
+  if (highlights && highlights.length) {
+    main.append(el("h3", "sub", s("highlights")));
+    const ul = el("ul", "highlights");
+    highlights.forEach((item) => ul.append(el("li", "", item)));
+    main.append(ul);
+  }
 
   const shots = p.images && p.images.length ? p.images : p.image ? [p.image] : [];
   const gallery = el("div", "gallery");
   if (shots.length) shots.forEach((src) => gallery.append(imageShot(src, t(p.title))));
   else gallery.append(placeholderShot());
-  wrap.append(gallery);
-
-  const details = t(p.details);
-  const paragraphs = details && details.length ? details : [t(p.description) || ""];
-  const text = el("div", "detail-text");
-  paragraphs.forEach((para) => text.append(el("p", "", para)));
-  wrap.append(text);
-
-  const highlights = t(p.highlights);
-  if (highlights && highlights.length) {
-    wrap.append(el("h3", "sub", s("highlights")));
-    const ul = el("ul", "highlights");
-    highlights.forEach((h) => ul.append(el("li", "", h)));
-    wrap.append(ul);
-  }
+  main.append(gallery);
 
   const nav = el("div", "detail-nav");
   const step = (delta, label) => {
@@ -183,8 +229,9 @@ function renderDetail(index) {
     return b;
   };
   if (ALL_PROJECTS.length > 1) nav.append(step(-1, s("prev")), step(1, s("next")));
-  wrap.append(nav);
+  main.append(nav);
 
+  wrap.append(head, aside, main);
   detailBody.replaceChildren(wrap);
   dialog.scrollTop = 0;
   detailBody.scrollTop = 0;
@@ -211,6 +258,40 @@ function syncFromHash() {
 }
 window.addEventListener("hashchange", syncFromHash);
 
+function renderSkills() {
+  const list = document.getElementById("skills");
+  list.replaceChildren(...SKILL_GROUPS.map((group) => {
+    const row = el("div");
+    row.append(el("dt", "", t(group.label)), el("dd", "", group.items.join(", ")));
+    return row;
+  }));
+}
+
+// Hero numbers. The internship start date is set in i18n.js (INTERNSHIP_START).
+function setNumber(id, value, digits) {
+  const node = document.getElementById(id);
+  const text = String(value).padStart(digits, "0");
+  node.textContent = text;
+  node.dataset.ghost = text.replace(/\d/g, "8");
+  node.dataset.target = value;
+}
+function renderHeroNumbers() {
+  const days = Math.max(0, Math.ceil((new Date(INTERNSHIP_START) - new Date()) / 86400000));
+  setNumber("stat-days", days, 3);
+  setNumber("stat-projects", ALL_PROJECTS.length, 2);
+}
+
+// Footer clock: the time in Québec. Without motion it shows hours and minutes only.
+const clock = document.getElementById("clock");
+function tick() {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "America/Toronto", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false
+  }).format(new Date());
+  const text = reducedMotion ? parts.slice(0, 5) : parts;
+  clock.textContent = text;
+  clock.dataset.ghost = text.replace(/\d/g, "8");
+}
+
 function applyLang() {
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach((n) => { n.textContent = s(n.dataset.i18n); });
@@ -218,7 +299,9 @@ function applyLang() {
   document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   document.getElementById("detail-close").setAttribute("aria-label", s("close"));
   renderGrid();
+  renderSkills();
   if (dialog.open && current >= 0) renderDetail(current);
+  animateNumbers = false; // count up once, not again on every language switch
 }
 
 document.querySelectorAll("[data-lang]").forEach((b) =>
@@ -229,9 +312,15 @@ document.querySelectorAll("[data-lang]").forEach((b) =>
   })
 );
 
-const skills = document.getElementById("skills");
-SKILLS.forEach((name) => skills.append(el("li", "", name)));
 document.getElementById("year").textContent = new Date().getFullYear();
+const modified = new Date(document.lastModified);
+document.getElementById("site-updated").textContent =
+  `${String(modified.getMonth() + 1).padStart(2, "0")}.${modified.getFullYear()}`;
+
+renderHeroNumbers();
+["stat-days", "stat-projects"].forEach((id) => countUp(document.getElementById(id)));
+tick();
+setInterval(tick, reducedMotion ? 30000 : 1000);
 
 applyLang();
 syncFromHash();
