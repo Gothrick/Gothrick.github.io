@@ -80,12 +80,12 @@ const PROJECTS = [
   {
     title: "WireChat",
     description: {
-      en: "A cross-platform messaging app with web, desktop, and mobile clients.",
-      fr: "Une messagerie multiplateforme avec clients web, bureau et mobile."
+      en: "A real-time messaging app with web, desktop, and mobile clients, and a retro redesign of the web app.",
+      fr: "Une messagerie en temps réel avec clients web, bureau et mobile, et une refonte rétro de l'application web."
     },
     tech: ["React", "React Native", "Electron", "Laravel", "GraphQL", "Docker"],
-    image: "images/wirechat-server-channel.jpg",
-    stat: { value: 3, label: { en: "apps sharing one server: web, desktop, phone", fr: "applis sur un même serveur : web, bureau, mobile" } },
+    image: "images/wirechat-workspace.jpg",
+    stat: { value: 2674, label: { en: "passing tests across the web, mobile, desktop and shared code", fr: "tests réussis pour le web, le mobile, le bureau et le code partagé" } },
     kind: "team",
     role: { en: "Team project", fr: "Projet d'équipe" },
     code: "https://github.com/Gothrick/WireChat",
@@ -95,32 +95,34 @@ const PROJECTS = [
     details: {
       en: [
         "WireChat is a real-time chat platform with friends, direct messages, and servers with channels. One Laravel API (GraphQL and REST, with live updates over WebSockets) serves three clients: a React web app, an Electron desktop app, and an Expo mobile app.",
-        "It started as a team course project at Cégep de Saint-Jean-sur-Richelieu. I took part in building the clients and the API and in the secure (TLS) infrastructure, and the team reviewed each other's code through pull requests. The repository gathers the API, web, desktop, and mobile apps, a data layer shared by web and mobile, and a Docker Compose setup."
+        "It started as a team course project at Cégep de Saint-Jean-sur-Richelieu. I took part in building the clients and the API and in the secure (TLS) infrastructure, and the team reviewed each other's code through pull requests. The latest round added message replies and emoji reactions, a workspace that shows up to four conversations side by side, and a redesigned web interface in light and dark themes. A copy runs on a small private test server, which is not linked here."
       ],
       fr: [
         "WireChat est une plateforme de clavardage en temps réel : amis, messages privés et serveurs avec canaux. Une API Laravel (GraphQL et REST, avec des mises à jour en direct par WebSocket) alimente trois clients : une application web React, une application de bureau Electron et une application mobile Expo.",
-        "Le projet est né comme projet d'équipe au Cégep de Saint-Jean-sur-Richelieu. J'ai participé au développement des clients et de l'API ainsi qu'à l'infrastructure sécurisée (TLS), et l'équipe révisait le code de chacun par demandes de fusion. Le dépôt regroupe l'API, les applications web, bureau et mobile, une couche de données partagée par le web et le mobile, et une configuration Docker Compose."
+        "Le projet est né comme projet d'équipe au Cégep de Saint-Jean-sur-Richelieu. J'ai participé au développement des clients et de l'API ainsi qu'à l'infrastructure sécurisée (TLS), et l'équipe révisait le code de chacun par demandes de fusion. La dernière étape a ajouté les réponses aux messages et les réactions par émoji, un espace de travail qui affiche jusqu'à quatre conversations côte à côte, et une interface web repensée en thèmes clair et sombre. Une copie tourne sur un petit serveur d'essai privé, qui n'est pas lié ici."
       ]
     },
     highlights: {
       en: [
         "One API, three clients: web, desktop, and mobile share the same real-time data layer",
-        "GraphQL subscriptions over WebSockets for instant messages, typing, and unread counters",
-        "Docker Compose stack with nginx and TLS, PostgreSQL, and Redis",
-        "Automated tests on every part: Jest, node:test, and PHPUnit"
+        "Web redesign drawn as a retro TV screen: brushed-aluminium dark theme, cream-and-wood light theme, contrast-checked colours",
+        "Message replies, emoji reactions, and a workspace with up to four conversations side by side",
+        "2,674 tests passing across the web, mobile, desktop and shared code, plus about 640 API tests (not run here, which needs PostgreSQL and Redis)"
       ],
       fr: [
         "Une API, trois clients : le web, le bureau et le mobile partagent la même couche de données en temps réel",
-        "Abonnements GraphQL par WebSocket pour les messages, la saisie et les compteurs de non lus",
-        "Pile Docker Compose avec nginx et TLS, PostgreSQL et Redis",
-        "Tests automatisés sur chaque volet : Jest, node:test et PHPUnit"
+        "Refonte web dessinée comme un écran de télé rétro : thème sombre en aluminium brossé, thème clair crème et bois, couleurs vérifiées pour le contraste",
+        "Réponses aux messages, réactions par émoji et espace de travail jusqu'à quatre conversations côte à côte",
+        "2 674 tests réussis pour le web, le mobile, le bureau et le code partagé, plus environ 640 tests de l'API (non exécutés ici : PostgreSQL et Redis requis)"
       ]
     },
     images: [
+      "images/wirechat-workspace.jpg",
       "images/wirechat-server-channel.jpg",
+      "images/wirechat-server-channel-light.jpg",
       "images/wirechat-direct-messages.jpg",
       "images/wirechat-friends.jpg",
-      "images/wirechat-login.jpg"
+      "images/wirechat-settings-theme.jpg"
     ]
   },
   {
