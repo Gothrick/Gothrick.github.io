@@ -4,7 +4,7 @@
 //     * it already has a hand-written card in projects.js (matched by its `code` link),
 //     * it is the site's own repo or the profile repo,
 //     * it has the GitHub topic `no-portfolio`,
-//     * it is listed in NEVER_LISTED below (repositories whose README must not be copied onto the site).
+//     * it is listed in NEVER_LISTED below.
 // - The card is filled from GitHub: description, languages, topics, homepage, README text,
 //   and screenshots found in docs/screenshots/.
 //
@@ -20,8 +20,7 @@ const OWNER = process.env.GITHUB_OWNER || 'Gothrick';
 const SITE_REPO = (process.env.SITE_REPO || `${OWNER}.github.io`).toLowerCase();
 const TOKEN = process.env.GITHUB_TOKEN;
 
-// Public repositories that never get a card, whatever their topics. WirechatDevSite is the design
-// sandbox of the hosted WireChat test server, and its README names that server's address.
+// Public repositories that never get a card, whatever their topics (design sandboxes and the like).
 const NEVER_LISTED = new Set(['wirechatdevsite']);
 
 const headers = {
