@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#0A0A0D"/><rect x="10" y="10" width="10" height="10" fill="#FF9F1C"/><text x="32" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="26" fill="#F2F2F0">ZO</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#05060B"/><path d="M39 6 14 36h13l-4 22 27-33H36z" fill="#5AB0FF"/></svg>

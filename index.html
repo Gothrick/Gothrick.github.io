@@ -5,24 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zackary Ouirzane — Developer</title>
 <meta name="description" content="Portfolio of Zackary Ouirzane, a computer science technology student seeking a software development internship in spring 2027 and a developer job afterwards.">
-<meta name="theme-color" content="#0A0A0D">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zackary Ouirzane — Developer">
-<meta property="og:description" content="Computer science technology student seeking a software development internship in spring 2027, then a developer job. Selected projects and contact.">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" href="fonts/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#05060B">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="nav dark">
+<header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top"><span class="sq" aria-hidden="true"></span>ZO / OUIRZANE</a>
+    <a class="brand" href="#top">
+      <svg class="bolt" viewBox="0 0 16 22" aria-hidden="true"><path d="M10.5 0 1 12.5h5.2L4.6 22 15 8.8H9.4z" fill="currentColor"/></svg>
+      <span>ZACKARY OUIRZANE</span>
+    </a>
     <div class="nav-right">
       <nav aria-label="Main">
-        <a href="#projects"><span class="idx" aria-hidden="true">01</span><span data-i18n="navProjects"></span></a>
-        <a href="#about"><span class="idx" aria-hidden="true">02</span><span data-i18n="navAbout"></span></a>
-        <a href="#contact"><span class="idx" aria-hidden="true">03</span><span data-i18n="navContact"></span></a>
+        <a href="#projects" data-i18n="navProjects"></a>
+        <a href="#about" data-i18n="navAbout"></a>
+        <a href="#contact" data-i18n="navContact"></a>
       </nav>
       <div class="lang" role="group" aria-label="Language / Langue">
         <button type="button" data-lang="en">EN</button>
@@ -34,65 +35,60 @@
 
 <main id="top">
 
-  <section class="hero dark">
-    <div class="wrap hero-grid">
+  <section class="hero" id="hero">
+    <canvas id="storm" aria-hidden="true"></canvas>
+    <div class="glow-fallback"></div>
+    <div class="wrap hero-body">
       <div class="hero-text">
-        <p class="status"><span class="sq pulse" aria-hidden="true"></span><span data-i18n="status"></span></p>
-        <h1 data-i18n-html="heroTitle"></h1>
+        <p class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="status"></span></p>
+        <h1>Zackary Ouirzane</h1>
         <p class="lead" data-i18n="lead"></p>
-        <div class="stats">
-          <div class="stat">
-            <div class="label" data-i18n="statStartLabel"></div>
-            <span class="seg big" id="stat-days" data-ghost="888">000</span>
-            <div class="sub" data-i18n="statStartSub"></div>
-          </div>
-          <div class="stat">
-            <div class="label" data-i18n="statProjectsLabel"></div>
-            <span class="seg big" id="stat-projects" data-ghost="88">00</span>
-            <div class="sub" data-i18n="statProjectsSub"></div>
-          </div>
-          <div class="stat">
-            <div class="label" data-i18n="statJobLabel"></div>
-            <span class="seg big" id="stat-year" data-ghost="8888">2027</span>
-            <div class="sub" data-i18n="statJobSub"></div>
-          </div>
-        </div>
-        <p class="links">
-          <a class="btn btn-glow" href="#projects" data-i18n="viewProjects"></a>
-          <a href="resume.pdf" data-i18n="resume"></a>
-          <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+        <p class="actions">
+          <a class="btn btn-main" href="#projects" data-i18n="viewProjects"></a>
+          <a class="btn" href="resume.pdf" data-i18n="resume"></a>
+          <a class="btn" href="https://github.com/Gothrick" rel="noopener">GitHub</a>
         </p>
       </div>
-      <dl class="facts">
-        <span class="x tl" aria-hidden="true"></span><span class="x tr" aria-hidden="true"></span>
-        <span class="x bl" aria-hidden="true"></span><span class="x br" aria-hidden="true"></span>
-        <div><dt data-i18n="factSeekingLabel"></dt><dd data-i18n="factSeeking"></dd></div>
-        <div><dt data-i18n="factSchoolLabel"></dt><dd>Cégep de Saint-Jean-sur-Richelieu</dd></div>
-        <div><dt data-i18n="factWorkLabel"></dt><dd data-i18n="factWork"></dd></div>
-        <div><dt data-i18n="factSpeaksLabel"></dt><dd data-i18n="factSpeaks"></dd></div>
-      </dl>
+      <ul class="hero-facts">
+        <li data-i18n="heroFact1"></li>
+        <li data-i18n="heroFact2"></li>
+        <li data-i18n="heroFact3"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="readouts" aria-label="At a glance">
+    <div class="wrap readouts-grid">
+      <div class="readout">
+        <div class="label" data-i18n="statStartLabel"></div>
+        <span class="seg" id="stat-days" data-ghost="888">000</span>
+        <div class="sub" data-i18n="statStartSub"></div>
+      </div>
     </div>
   </section>
 
   <section id="projects" class="section">
     <div class="wrap">
       <div class="section-head">
-        <h2><span class="idx" aria-hidden="true">01</span><span data-i18n="selectedWork"></span></h2>
+        <h2 data-i18n="selectedWork"></h2>
         <span class="mono muted" id="projects-count"></span>
       </div>
-      <div class="grid" id="project-grid"></div>
+      <div class="workbench">
+        <div class="tablist" role="tablist" aria-orientation="vertical" id="tablist" aria-label="Projects"></div>
+        <div class="panel" role="tabpanel" id="panel" tabindex="0"></div>
+      </div>
     </div>
   </section>
 
   <section id="about" class="section">
     <div class="wrap two-col">
       <div>
-        <h2><span class="idx" aria-hidden="true">02</span><span data-i18n="aboutTitle"></span></h2>
+        <h2 data-i18n="aboutTitle"></h2>
         <p data-i18n="aboutP1"></p>
         <p data-i18n="aboutP2"></p>
       </div>
       <div>
-        <h2 class="plain" data-i18n="skillsTitle"></h2>
+        <h2 data-i18n="skillsTitle"></h2>
         <dl class="skills" id="skills"></dl>
       </div>
     </div>
@@ -100,25 +96,24 @@
 
   <section id="contact" class="section contact">
     <div class="wrap">
-      <h2><span class="idx" aria-hidden="true">03</span><span data-i18n="contactTitle"></span></h2>
+      <h2 data-i18n="contactTitle"></h2>
       <p><a class="email" href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a></p>
-      <p class="links">
-        <a class="btn btn-ink" href="#projects" data-i18n="viewProjects"></a>
-        <a href="resume.pdf" data-i18n="resume"></a>
-        <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
+      <p class="actions">
+        <a class="btn btn-main" href="#projects" data-i18n="viewProjects"></a>
+        <a class="btn" href="resume.pdf" data-i18n="resume"></a>
+        <a class="btn" href="https://github.com/Gothrick" rel="noopener">GitHub</a>
       </p>
     </div>
   </section>
 
 </main>
 
-<footer class="footer dark">
+<footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-links mono">
       <a href="mailto:zackaryouirzane@gmail.com">Email</a>
       <a href="https://github.com/Gothrick" rel="noopener">GitHub</a>
       <a href="resume.pdf" data-i18n="resumeShort"></a>
-      <span><span data-i18n="updated"></span> <span id="site-updated"></span></span>
       <span>© <span id="year"></span> Zackary Ouirzane</span>
     </div>
     <div class="clock">
@@ -128,16 +123,11 @@
   </div>
 </footer>
 
-<dialog id="detail" aria-labelledby="detail-title">
-  <button class="detail-close" id="detail-close" aria-label="Close project details">&times;</button>
-  <div id="detail-body"></div>
-</dialog>
-
 <script src="i18n.js"></script>
-<noscript><p style="text-align:center;padding:2rem">This site needs JavaScript to show the project list. Find my work on <a href="https://github.com/Gothrick">GitHub</a> or write to <a href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a>.</p></noscript>
-
 <script src="projects.js"></script>
 <script src="auto-projects.js"></script>
 <script src="script.js"></script>
+<script type="module" src="storm.js"></script>
+<noscript><p style="text-align:center;padding:2rem">This site needs JavaScript. Find my work on <a href="https://github.com/Gothrick">GitHub</a> or write to <a href="mailto:zackaryouirzane@gmail.com">zackaryouirzane@gmail.com</a>.</p></noscript>
 </body>
 </html>
