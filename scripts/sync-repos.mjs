@@ -3,7 +3,8 @@
 // - Every public, non-fork, non-archived repo gets a basic card, unless:
 //     * it already has a hand-written card in projects.js (matched by its `code` link),
 //     * it is the site's own repo or the profile repo,
-//     * it has the GitHub topic `no-portfolio`.
+//     * it has the GitHub topic `no-portfolio`,
+//     * it is listed in NEVER_LISTED below (repositories whose README must not be copied onto the site).
 // - The card is filled from GitHub: description, languages, topics, homepage, README text,
 //   and screenshots found in docs/screenshots/.
 //
@@ -18,6 +19,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OWNER = process.env.GITHUB_OWNER || 'Gothrick';
 const SITE_REPO = (process.env.SITE_REPO || `${OWNER}.github.io`).toLowerCase();
 const TOKEN = process.env.GITHUB_TOKEN;
+
+// Public repositories that never get a card, whatever their topics. WirechatDevSite is the design
+// sandbox of the hosted WireChat test server, and its README names that server's address.
+const NEVER_LISTED = new Set(['wirechatdevsite']);
 
 const headers = {
   Accept: 'application/vnd.github+json',
@@ -124,6 +129,7 @@ const repos = (await listRepos()).filter(
     repo.name.toLowerCase() !== SITE_REPO &&
     repo.name.toLowerCase() !== OWNER.toLowerCase() &&
     !(repo.topics ?? []).includes('no-portfolio') &&
+    !NEVER_LISTED.has(repo.name.toLowerCase()) &&
     !curated.has(repo.name.toLowerCase()),
 );
 
