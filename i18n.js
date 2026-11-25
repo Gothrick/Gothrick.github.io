@@ -26,7 +26,7 @@ const STRINGS = {
     factSpeaksLabel: "Languages",
     factSpeaks: "French (native), English (professional)",
     viewProjects: "View projects",
-    resume: "Résumé (PDF, in French)",
+    resume: "Résumé (PDF)",
     resumeShort: "Résumé",
     selectedWork: "Selected work",
     projectOne: "project",

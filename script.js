@@ -210,6 +210,8 @@ function applyLang() {
   document.querySelectorAll("[data-i18n]").forEach((n) => { n.textContent = s(n.dataset.i18n); });
   document.querySelectorAll("[data-i18n-html]").forEach((n) => { n.innerHTML = s(n.dataset.i18nHtml); });
   document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  // The résumé comes in both languages: the link follows the language of the page.
+  document.querySelectorAll("[data-resume]").forEach((a) => { a.href = lang === "fr" ? "resume.pdf" : "resume-en.pdf"; });
   const n = PROJECT_LIST.length;
   document.getElementById("projects-count").textContent = `${n} ${n === 1 ? s("projectOne") : s("projectMany")}`;
   renderTabs(); renderPanel(); renderSkills();
